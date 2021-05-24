@@ -19,8 +19,3 @@ Saves a file to the working directory (or path from filename)
 \description{
 Get an exercise
 }
-\examples{
-exercise(1) # get exercise for chapter 1
-exercise(1, answers = TRUE) # get answers for chapter 1
-exercise(1, "exercises/ch1.Rmd") # save into exercises directory
-}

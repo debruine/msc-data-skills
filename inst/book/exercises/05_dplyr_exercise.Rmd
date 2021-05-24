@@ -6,11 +6,19 @@ output: html_document
 
 ```{r setup, include=FALSE}
 # please do not alter this code chunk
-knitr::opts_chunk$set(echo = TRUE, message = FALSE)
-library("ukbabynames")
-library("tidyverse")
-set.seed(777) # makes sure random numbers are reproducible
+knitr::opts_chunk$set(echo = TRUE, 
+                      message = FALSE, 
+                      error = TRUE)
+library(tidyverse)
+library(ukbabynames)
+
+# install the class package dataskills to access built-in data
+# devtools::install_github("psyteachr/msc-data-skills)
+# or download data from the website
+# https://psyteachr.github.io/msc-data-skills/data/data.zip
 ```
+
+Edit the code chunks below and knit the document. You can pipe your objects to `glimpse()` or `print()` to display them.
 
 ## UK Baby Names
 
@@ -125,101 +133,97 @@ How many babies were born each year for each sex?  Make a plot.
 
 ```{r Q13}
 babies_per_year <- NULL
-
-ggplot(babies_per_year)
 ```
 
-## Advanced Questions
+## Select helpers
 
-There are several ways to complete the following two tasks. Different people will solve them different ways, so they cannot be automatically checked, but you should be able to tell if your answers make sense.
+Load the dataset [dataskills::personality](https://psyteachr.github.io/msc-data-skills/data/personality.csv).
+
+Select only the personality question columns (not the user_id or date).
+
+```{r SH1}
+q_only <- NULL
+```
+
+Select the `user_id` column and all of the columns with questions about openness.
+
+```{r SH2}
+openness <- NULL
+```
+
+Select the `user_id` column and all of the columns with the first question for each personality trait.
+
+```{r SH3}
+q1 <- NULL
+```
+
+
+## Window fuctions
+
+The code below sets up a fake dataset where 10 subjects respond to 20 trials with a `dv` on a 5-point Likert scale. 
+
+```{r window-setup}
+set.seed(10)
+
+fake_data <- tibble(
+  subj_id = rep(1:10, each = 20),
+  trial = rep(1:20, times = 10),
+  dv = sample.int(5, 10*20, TRUE)
+)
+```
 
 ### Question 14
 
-Load the dataset [family_composition.csv](https://psyteachr.github.io/msc-data-skills/data/family_composition.csv) from last week's exercise.
+You want to know how many times each subject responded with the same dv as their last trial. For example, if someone responded 2,3,3,3,4 for five trials they would have repeated their last response on the third and fourth trials. Use an offset function to determine how many times each subject repeated a response.
 
-The columns `oldbro` through `twinsis` give the number of siblings of that age and sex. Put this into long format and create separate columns for sibling age (old, young, twin) and sex (bro, sis). 
-
-Then, calculate how many siblings of each sex each person has, narrow the dataset down to people with fewer than 6 siblings, and generate at least two different ways to graph this.
-
-    
-```{r Q14a}
-sib6 <- NULL
-
-ggplot(sib6)
-
+```{r Q14}
+repeated_data <- NULL
 ```
-    
-```{r Q14b}
-ggplot(sib6)
-```   
-
 
 ### Question 15
 
-Use the data from [eye_descriptions.csv](https://psyteachr.github.io/msc-data-skills/data/eye_descriptions.csv) from last week's exercise.
+Create a table `too_many_repeats` with the top two repeaters from `repeated_data` (and anyone who might be tied with them) using ranking functions. 
 
-Create a list of the 10 most common descriptions from the eyes dataset. Remove useless descriptions and merge redundant descriptions. Display the table by piping the resulting tibble to `knitr::kable()`.
+```{r Q15}
+too_many_repeats <- NULL
+```
+
+
+## Advanced Questions
+
+There are several ways to complete the following two tasks. Different people will solve them different ways, but you should be able to tell if your answers make sense.
+
+### Question 16
+
+Load the dataset [dataskills::family_composition](https://psyteachr.github.io/msc-data-skills/data/family_composition.csv) from last week's exercise.
+
+Calculate how many siblings of each sex each person has, narrow the dataset down to people with fewer than 6 siblings, and generate at least two different ways to graph this.
+
+```{r Q16a}
+sib6 <- NULL
+
+ggplot(sib6)
+```
     
-```{r Q15, results = 'asis'}
+```{r Q16b}
+sib6 <- NULL
+
+ggplot(sib6)
+```
+
+
+### Question 17
+
+Use the dataset [dataskills::eye_descriptions](https://psyteachr.github.io/msc-data-skills/data/eye_descriptions.csv) from last week's exercise.
+
+Create a list of the 10 most common descriptions from the eyes dataset. Remove useless descriptions and merge redundant descriptions.
+    
+```{r Q17}
 eyes <- NULL
-
-knitr::kable(eyes) # displays the table in a nice format
 ```
 
-## Answer Checks
-
-You've made it to the end. Make sure you are able to knit this document to HTML. You can check your answers below in the knit document.
-
-```{r answer-checks, echo = FALSE, warning=FALSE, results='asis'}
-# do not edit
-Q <- list()
-Q["1"] <- all.equal(nrecords, 227449)
-Q["2"] <- c(is.data.frame(norank),
-          !(c("rank") %in% names(norank))) %>% all()
-Q["3"] <- c(is.data.frame(birth_range),
-          all.equal(birth_range$minyear, 1996),
-          all.equal(birth_range$maxyear, 2015)) %>% all()
-Q["4"] <- ifelse(is.data.frame(hermiones),
-          c(all.equal(n_distinct(hermiones$name), 1),
-          all.equal(nrow(hermiones), 20L)),
-          FALSE) %>% all()
-Q["5"] <- c(is.data.frame(sorted_babies),
-          all.equal(sorted_babies[[1,1]], 2015),
-          all.equal(sorted_babies[[1,2]], "F"),
-          all.equal(sorted_babies[[1,3]], "Aabidah"),
-          all.equal(sorted_babies[[1,4]], 3),
-          all.equal(sorted_babies[[1,5]], 5730)) %>% all()
-Q["6"] <- c(is.data.frame(ukb_decade),
-          all.equal(ukb_decade$decade[[1]], 1990)) %>% all()
-Q["7"] <- ifelse(is.data.frame(courtney),
-          c(all.equal(n_distinct(courtney$name), 1),
-          all.equal(min(courtney$year), 1998),
-          all.equal(max(courtney$year), 2001),
-          all.equal(nrow(courtney), 4L)),
-          FALSE) %>% all()
-Q["8"] <- all.equal(distinct_names, 31272L)
-Q["9"] <- if(is.data.frame(frankie)) {
-          c(all.equal(n_distinct(frankie$name), 1),
-          all.equal(min(frankie$year), 1996),
-          all.equal(max(frankie$year), 2015),
-          all.equal(nrow(frankie), 8L))
-          } else { FALSE } %>% all()
-Q["10"] <- all.equal(emily, 102250)
-Q["11"] <- if(is.data.frame(names_per_sex)) {
-          c(all.equal(filter(names_per_sex, sex == "F") %>% pull(n), 18823),
-          all.equal(filter(names_per_sex, sex == "M") %>% pull(n), 14378))
-          } else { FALSE } %>% all()
-Q["12"] <- all.equal(most_popular, "Jack")
-Q["13"] <- c(is.data.frame(babies_per_year),
-             all.equal(nrow(babies_per_year), 40)) %>% all()
-  
-ans <- sapply(Q, isTRUE)
-
-knitr::kable(data.frame(
-  Question = paste0("<a href='#question-", names(Q), "'>Question ", names(Q), "</a>"),
-  Answer = ifelse(ans, "correct", "incorrect")
-))
+```{r Q17-print, results='asis'}
+# displays the table in a nice format
+knitr::kable(eyes) 
 ```
-
-
 

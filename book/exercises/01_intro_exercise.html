@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -270,7 +269,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -332,6 +330,7 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -369,71 +368,52 @@ summary {
 </div>
 
 
-<p>Edit the code chunks below and knit the document to check if the answers are correct. Make sure you don’t change the names of the variables that are given to you, or the answer checks won’t work.</p>
-<div id="question-1" class="section level2">
-<h2>Question 1</h2>
-<p>Create a variable called <code>my_pals</code> containing the names of three of your friends. This should be a three-element vector of type <code>character</code>.</p>
-<pre class="r"><code>my_pals &lt;- NULL</code></pre>
+<p>Edit the code chunks below and knit the document.</p>
+<div id="type-commands-into-the-console" class="section level2">
+<h2>Type commands into the console</h2>
+<p>In the console, type the following:</p>
+<pre><code>1 + 2
+a &lt;- 1
+b &lt;- 2
+a + b</code></pre>
+<p>Look at the Environment tab in the upper right pane. Set the variable <code>how_many_objects</code> below to the number of objects listed in the environment.</p>
+<pre class="r"><code>how_many_objects &lt;- NULL</code></pre>
 </div>
-<div id="question-2" class="section level2">
-<h2>Question 2</h2>
-<p>The chunk below creates an integer vector <code>ages</code> with the ages of five people. (Note: defining a number with the sufficx <code>L</code>, e.g., <code>26L</code>, defines <code>26</code> as type integer rather than type double.) Calculate how old they will be in ten years using a vectorized operation and store the result in the variable <code>ages_10</code>.</p>
-<pre class="r"><code>ages &lt;- c(26L, 13L, 47L, 62L, 18L)
-
-ages_10 &lt;- NULL</code></pre>
-</div>
-<div id="question-3" class="section level2">
-<h2>Question 3</h2>
-<p>The code below has an error and won’t run. Fix the code.</p>
-<pre class="r"><code>my_fortune &lt;- fortune()</code></pre>
-<pre><code>## Error in fortune(): could not find function &quot;fortune&quot;</code></pre>
-<pre class="r"><code>my_fortune</code></pre>
-<pre><code>## Error in eval(expr, envir, enclos): object 'my_fortune' not found</code></pre>
-</div>
-<div id="question-4" class="section level2">
-<h2>Question 4</h2>
-<p>Call the <code>rnorm()</code> function to generate 10 random values from a normal distribution with a mean of 800 and a standard deviation of 20, and store the result in the variable <code>random_vals</code>.</p>
+<div id="understand-function-syntax" class="section level2">
+<h2>Understand function syntax</h2>
+<p>Use the <code>rnorm()</code> function to generate 10 random values from a normal distribution with a mean of 800 and a standard deviation of 20, and store the resulting vector in the object <code>random_vals</code>.</p>
 <pre class="r"><code>random_vals &lt;- NULL</code></pre>
-</div>
-<div id="question-5" class="section level2">
-<h2>Question 5</h2>
 <p>Use the help function to figure out what argument you need to set to ignore <code>NA</code> values when calculating the mean of <code>the_values</code>. Change the function below to store the mean of <code>the_values</code> in the variable <code>the_mean</code>.</p>
 <pre class="r"><code>the_values &lt;- c(1,1,1,2,3,4,6,8,9,9, NA) # do not alter this line
-the_mean &lt;- mean(the_values)</code></pre>
+the_mean   &lt;- NULL</code></pre>
+<p>Figure out what the function <code>seq()</code> does. Use the function to set <code>tens</code> to the vector <code>c(0, 10, 20, 30, 40, 50 ,60, 70 ,80 ,90, 100)</code>. Set <code>bins6</code> to the cutoffs if you wanted to divide the numbers 0 to 100 into 6 bins. For example, dividing 0 to 100 into 4 bins results in the cutoffs <code>c(0, 25, 50, 75, 100)</code>,</p>
+<pre class="r"><code>tens  &lt;- NULL
+bins6 &lt;- NULL</code></pre>
+<p>Figure out how to use the <code>paste()</code> function to paste together strings with forward slashes (“/”) instead of spaces. Use <code>paste()</code> to set <code>my_dir</code> to “my/project/directory”.</p>
+<pre class="r"><code>my_dir &lt;- NULL</code></pre>
 </div>
-<div id="answer-checks" class="section level2">
-<h2>Answer Checks</h2>
-<p>You’ve made it to the end. Make sure you are able to knit this document to HTML. You can check your answers below in the knit document.</p>
-<table>
-<thead>
-<tr class="header">
-<th align="left">Question</th>
-<th align="left">Answer</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left"><a href="#question-1">Question 1</a></td>
-<td align="left">incorrect</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="#question-2">Question 2</a></td>
-<td align="left">incorrect</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="#question-3">Question 3</a></td>
-<td align="left">incorrect</td>
-</tr>
-<tr class="even">
-<td align="left"><a href="#question-4">Question 4</a></td>
-<td align="left">incorrect</td>
-</tr>
-<tr class="odd">
-<td align="left"><a href="#question-5">Question 5</a></td>
-<td align="left">incorrect</td>
-</tr>
-</tbody>
-</table>
+<div id="install-a-package" class="section level2">
+<h2>Install a package</h2>
+<p>Install the CRAN package called “fortunes”. Run the code to do and include it in the code chunk below, but comment it out. It is bad practice to write a script that installs a package without the user having the option to cancel. Also, some packages take a long time to load, so you won’t want to install them every time you run a script.</p>
+<pre class="r"><code># comment out the installation code</code></pre>
+<p>The code below has an error and won’t run. Fix the code.</p>
+<pre class="r"><code>fortune()</code></pre>
+<pre><code>## Error in fortune(): could not find function &quot;fortune&quot;</code></pre>
+</div>
+<div id="organise-a-project" class="section level2">
+<h2>Organise a project</h2>
+<p>Create a new project called “website”.</p>
+</div>
+<div id="create-and-compile-an-rmarkdown-document" class="section level2">
+<h2>Create and compile an Rmarkdown document</h2>
+<p>In the “website” project, create a new Rmarkdown document called “index.Rmd”. Do the following in this document:</p>
+<ul>
+<li>Write a short paragraph describing your research interest.</li>
+<li>Include a bullet-point list of links to websites that are useful for your research.</li>
+<li>Add an image of anything relevant.</li>
+<li>Include a code chunk at the end that displays a fortune from the fortunes package.</li>
+<li>Knit this document to html.</li>
+</ul>
 </div>
 
 

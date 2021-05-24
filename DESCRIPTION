@@ -1,6 +1,7 @@
 Package: dataskills
 Title: Data Skills for Reproducible Science
-Version: 2.0
+Version: 2.11
+Date: 2020-11-13
 Authors@R: 
   c(
     person(
@@ -31,7 +32,9 @@ Imports:
     readr,
     lubridate,
     purrr,
+    stringr,
     plotly,
+    pwr,
     MASS,
     broom,
     readxl,
@@ -40,18 +43,19 @@ Imports:
     shinyjs,
     shinydashboard,
     ukbabynames,
-    cowplot
+    cowplot,
+    rio,
+    rstudioapi, 
+    tidyverse
 Suggests: 
     rmarkdown,
     zip,
     webex,
     R.utils,
-    faux (>= 0.0.1.2)
+    faux (>= 0.0.1.5),
+    testthat
 VignetteBuilder: knitr
 Depends: 
-    tidyverse,
     R (>= 2.10)
-Remotes: 
-    debruine/faux
 URL: https://github.com/psyteachr/msc-data-skills
 BugReports: https://github.com/psyteachr/msc-data-skills/issues

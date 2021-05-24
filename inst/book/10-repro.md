@@ -1,8 +1,9 @@
 # Reproducible Workflows {#repro}
 
-<img src="images/memes/repro_reports.jpg" class="meme right">
+<img src="images/memes/repro_reports.jpg" class="meme right"
+     alt="Top left: young spongebob; top right: Using Base R for your analysis and copy pasting yur results into tables in Word; middle left: older angry spongebob in workout clothes; middle right: learning how to use dplyr visualize data with ggplot2 and report your analysis in rmarkdown documents; bottom left: muscular spongebob shirtless in a boxing ring; bottom right: wielding the entire might of the tidyverse (with 50 hex stikers)">
 
-## Learning Objectives
+## Learning Objectives {#ilo10}
 
 ### Basic
 
@@ -24,7 +25,7 @@
 10. Create a computationally reproducible project in Code Ocean
 
 
-## Resources
+## Resources {#resources10}
 
 * [Chapter 27: R Markdown](http://r4ds.had.co.nz/r-markdown.html) in *R for Data Science*
 * [R Markdown Cheat Sheet](http://www.rstudio.com/wp-content/uploads/2016/03/rmarkdown-cheatsheet-2.0.pdf)
@@ -35,17 +36,19 @@
 * [Code Ocean](https://codeocean.com/) for Computational Reproducibility
 
 
-## R Markdown
+## Setup {#setup10}
 
 
 ```r
 library(tidyverse)
+library(knitr)
+library(broom)
+set.seed(8675309)
 ```
 
+## R Markdown
 
-
-
-By now you should be pretty comfortable working with R Markdown files from the weekly formative exercises and set exercises. Here, we'll explore some of the more advanced options and create an R Markdown document that produces a reproducible manuscript.
+By now you should be pretty comfortable working with R Markdown files from the weekly formative exercises and set exercises. Here, we'll explore some of the more advanced options and create an R Markdown document that produces a <a class='glossary' target='_blank' title='The extent to which the findings of a study can be repeated in some other context' href='https://psyteachr.github.io/glossary/r#reproducibility'>reproducible</a> manuscript.
 
 First, make a new R Markdown document.
 
@@ -91,7 +94,7 @@ The code above sets the following options:
 
 ### YAML Header
 
-The YAML header is where you can set several options. 
+The <a class='glossary' target='_blank' title='A structured format for information' href='https://psyteachr.github.io/glossary/y#yaml'>YAML</a> header is where you can set several options. 
 
 ```
 ---
@@ -117,7 +120,7 @@ The built-in themes are: "cerulean", "cosmo", "flatly", "journal", "lumen", "pap
 
 ### TOC and Document Headers
 
-If you include a table of contents (`toc`), it is created from your document headers. Headers in markdown are created by prefacing the header title with one or more hashes (`#`). Add a typical paper structure to your document like the one below.  
+If you include a table of contents (`toc`), it is created from your document headers. Headers in <a class='glossary' target='_blank' title='A way to specify formatting, such as headers, paragraphs, lists, bolding, and links.' href='https://psyteachr.github.io/glossary/m#markdown'>markdown</a> are created by prefacing the header title with one or more hashes (`#`). Add a typical paper structure to your document like the one below.  
 
 ```
 ## Abstract
@@ -155,9 +158,7 @@ What does it all mean?
 
 ### Code Chunks
 
-You can include code chunks that create and display images, tables, or computations to include in your text.
-
-Let's start by simulating some data.
+You can include <a class='glossary' target='_blank' title='A block of R code in an R Markdown file.' href='https://psyteachr.github.io/glossary/c#chunk'>code chunks</a> that create and display images, tables, or computations to include in your text. Let's start by simulating some data.
 
 First, create a code chunk in your document. You can put this before the abstract, since we won't be showing the code in this document. We'll use a modified version of the `two_sample` function from the [GLM lecture](09_glm.html) to create two groups with a difference of 0.75 and 100 observations per group. 
 
@@ -474,12 +475,16 @@ citation(package="rmarkdown")
 ##   JJ Allaire and Yihui Xie and Jonathan McPherson and Javier Luraschi
 ##   and Kevin Ushey and Aron Atkins and Hadley Wickham and Joe Cheng and
 ##   Winston Chang and Richard Iannone (2020). rmarkdown: Dynamic
-##   Documents for R. R package version 2.3. URL
+##   Documents for R. R package version 2.6. URL
 ##   https://rmarkdown.rstudio.com.
 ## 
 ##   Yihui Xie and J.J. Allaire and Garrett Grolemund (2018). R Markdown:
 ##   The Definitive Guide. Chapman and Hall/CRC. ISBN 9781138359338. URL
 ##   https://bookdown.org/yihui/rmarkdown.
+## 
+##   Yihui Xie and Christophe Dervieux and Emily Riederer (2020). R
+##   Markdown Cookbook. Chapman and Hall/CRC. ISBN 9780367563837. URL
+##   https://bookdown.org/yihui/rmarkdown-cookbook.
 ## 
 ## To see these entries in BibTeX format, use 'print(<citation>,
 ## bibtex=TRUE)', 'toBibtex(.)', or set
@@ -555,6 +560,18 @@ You can knit your file to PDF or Word if you have the right packages installed o
 Computational reproducibility refers to making all aspects of your analysis reproducible, including specifics of the software you used to run the code you wrote. R packages get updated periodically and some of these updates may break your code. Using a computational reproducibility platform guards against this by always running your code in the same environment.
 
 [Code Ocean](https://codeocean.com/) is a new platform that lets you run your code in the cloud via a web browser. 
+
+## Glossary {#glossary10}
+
+
+
+|term                                                                                                                  |definition                                                                           |
+|:---------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------|
+|<a class='glossary' target='_blank' href='https://psyteachr.github.io/glossary/c#chunk'>chunk</a>                     |A block of R code in an R Markdown file.                                             |
+|<a class='glossary' target='_blank' href='https://psyteachr.github.io/glossary/m#markdown'>markdown</a>               |A way to specify formatting, such as headers, paragraphs, lists, bolding, and links. |
+|<a class='glossary' target='_blank' href='https://psyteachr.github.io/glossary/r#reproducibility'>reproducibility</a> |The extent to which the findings of a study can be repeated in some other context    |
+|<a class='glossary' target='_blank' href='https://psyteachr.github.io/glossary/y#yaml'>yaml</a>                       |A structured format for information                                                  |
+
 
 
 ## References

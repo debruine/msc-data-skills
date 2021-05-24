@@ -6,74 +6,88 @@ output: html_document
 
 ```{r setup, include=FALSE}
 # please do not alter this code chunk
-knitr::opts_chunk$set(echo = TRUE)
-set.seed(8675309) # makes sure random numbers are reproducible
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, error = TRUE)
 ```
 
-Edit the code chunks below and knit the document to check if the answers are correct. Make sure you don't change the names of the variables that are given to you, or the answer checks won't work.
+Edit the code chunks below and knit the document.
 
-## Question 1
 
-Create a variable called `my_pals` containing the names of three of your friends. This should be a three-element vector of type `character`.
+## Type commands into the console
+
+In the console, type the following:
+
+```
+1 + 2
+a <- 1
+b <- 2
+a + b
+```
+
+Look at the Environment tab in the upper right pane. Set the variable `how_many_objects` below to the number of objects listed in the environment.
 
 ```{r Q1}
-my_pals <- NULL
+how_many_objects <- NULL
 ```
 
-## Question 2
 
-The chunk below creates an integer vector `ages` with the ages of five people. (Note: defining a number with the suffix `L`, e.g., `26L`, defines `26` as type integer rather than type double.)  Calculate how old they will be in ten years using a vectorized operation and store the result in the variable `ages_10`.
+## Understand function syntax
+
+Use the `rnorm()` function to generate 10 random values from a normal distribution with a mean of 800 and a standard deviation of 20, and store the resulting vector in the object `random_vals`.
 
 ```{r Q2}
-ages <- c(26L, 13L, 47L, 62L, 18L)
-
-ages_10 <- NULL
-```
-
-## Question 3
-
-The code below has an error and won't run. Fix the code.
-
-```{r Q3, error = TRUE}
-my_fortune <- fortune()
-
-my_fortune
-```
-
-## Question 4
-
-Call the `rnorm()` function to generate 10 random values from a normal distribution with a mean of 800 and a standard deviation of 20, and store the result in the variable `random_vals`.
-
-```{r Q4}
 random_vals <- NULL
 ```
 
-## Question 5
 
 Use the help function to figure out what argument you need to set to ignore `NA` values when calculating the mean of `the_values`. Change the function below to store the mean of `the_values` in the variable `the_mean`.
 
-```{r Q5}
+```{r Q3}
 the_values <- c(1,1,1,2,3,4,6,8,9,9, NA) # do not alter this line
-the_mean <- mean(the_values)
+the_mean   <- NULL
 ```
 
-## Answer Checks
 
-You've made it to the end. Make sure you are able to knit this document to HTML. You can check your answers below in the knit document.
+Figure out what the function `seq()` does. Use the function to set `tens` to the vector `c(0, 10, 20, 30, 40, 50 ,60, 70 ,80 ,90, 100)`. Set `bins6` to the cutoffs if you wanted to divide the numbers 0 to 100 into 6 bins. For example, dividing 0 to 100 into 4 bins results in the cutoffs `c(0, 25, 50, 75, 100)`,
 
-```{r answer-checks, echo = FALSE, results='asis'}
-# do not edit
-Q <- list()
-Q["1"] <- all.equal(length(my_pals), 3)
-Q["2"] <- all.equal(ages_10,c(36, 23, 57, 72, 28))
-Q["3"] <- if (exists("my_fortune")) is.list(my_fortune) else FALSE
-Q["4"] <- all.equal(sum(random_vals), 8054.524090755702)
-Q["5"] <- all.equal(the_mean, 4.4)
-
-ans <- sapply(Q, isTRUE)
-
-knitr::kable(data.frame(
-  Question = paste0("<a href='#question-", names(Q), "'>Question ", names(Q), "</a>"),
-  Answer = ifelse(ans, "correct", "incorrect")
-))
+```{r Q4}
+tens  <- NULL
+bins6 <- NULL
 ```
+
+
+Figure out how to use the `paste()` function to paste together strings with forward slashes ("/") instead of spaces. Use `paste()` to set `my_dir` to "my/project/directory".
+
+```{r Q5}
+my_dir <- NULL
+```
+
+
+## Install a package
+
+Install the CRAN package called "fortunes". Run the code to do and include it in the code chunk below, but comment it out. It is bad practice to write a script that installs a package without the user having the option to cancel. Also, some packages take a long time to load, so you won't want to install them every time you run a script.
+
+```{r Q6}
+# comment out the installation code
+
+```
+
+
+The code below has an error and won't run. Fix the code.
+
+```{r Q7}
+fortune()
+```
+
+## Organise a project
+
+Create a new project called "website".
+
+## Create and compile an Rmarkdown document
+
+In the "website" project, create a new Rmarkdown document called "index.Rmd". Do the following in this document:
+
+* Write a short paragraph describing your research interest. 
+* Include a bullet-point list of links to websites that are useful for your research. 
+* Add an image of anything relevant.
+* Include a code chunk at the end that displays a fortune from the fortunes package. 
+* Knit this document to html.

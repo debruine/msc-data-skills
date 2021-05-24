@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -270,7 +269,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -332,6 +330,7 @@ summary {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -398,7 +397,8 @@ summary(iris_mod) #print out the model summary</code></pre>
 ## (Intercept)  -3.20022    0.25689  -12.46   &lt;2e-16 ***
 ## Sepal.Length  0.75292    0.04353   17.30   &lt;2e-16 ***
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Signif. codes:  
+## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
 ## Residual standard error: 0.44 on 148 degrees of freedom
 ## Multiple R-squared:  0.669,  Adjusted R-squared:  0.6668 
@@ -430,14 +430,15 @@ iris_pred # print the predicted values</code></pre>
 <p><em>NOTE: You can knit this file to html to see formatted versions of the equations below (which are enclosed in <code>$</code> characters); alternatively, if you find it easier, you can hover your mouse pointer over the <code>$</code> in the code equations to see the formatted versions.</em></p>
 <p>Write code to randomly generate 10 Y values from a simple linear regression model with an intercept of 3 and a slope of -7. Recall the form of the linear model:</p>
 <p><span class="math inline">\(Y_i = \beta_0 + \beta_1 X_i + e_i\)</span></p>
-<p>The residuals (<span class="math inline">\(e_i\)</span>s) are drawn from a normal distribution with mean 0 and variance <span class="math inline">\(\sigma^2 = 4\)</span>, and <span class="math inline">\(X\)</span> is the vector of integer values from 1 to 10. Store the 10 observations in the variable <code>Yi</code> below. (NOTE: the standard deviation is the <em>square root</em> of the variance, i.e. <span class="math inline">\(\sigma\)</span>; <code>rnorm()</code> takes the standard deviation, not the variance, as its third argument).</p>
+<p>The residuals (<span class="math inline">\(e_i\)</span>s) are drawn from a normal distribution with mean 0 and variance <span class="math inline">\(\sigma^2 = 4\)</span>, and <span class="math inline">\(X\)</span> is the vector of integer values from 1 to 10. Store the 10 observations in the variable <code>Yi</code> below. (NOTE: the standard deviation is the <em>square root</em> of the variance, i.e. <span class="math inline">\(\sigma\)</span>; <code>rnorm()</code> takes the standard deviation, not the variance, as its third argument).</p>
 <pre class="r"><code>X &lt;- 1:10
 err &lt;- rnorm(10, sd = 2)
 Yi &lt;- 3 - 7 * X + err
 
 Yi # print the values of Yi</code></pre>
-<pre><code>##  [1]  -3.535761  -9.007200 -17.938710 -25.647394 -35.984147 -36.451994
-##  [7] -42.896233 -54.699763 -62.737743 -64.578007</code></pre>
+<pre><code>##  [1]  -0.7426784  -7.7594656 -20.9941041 -22.8379955
+##  [5] -31.3152752 -40.3503036 -45.3260546 -51.4067219
+##  [9] -60.7134652 -68.6375608</code></pre>
 </div>
 </div>
 <div id="advanced" class="section level2">
@@ -472,53 +473,53 @@ knitr::kable(dat6) # print table</code></pre>
 <tbody>
 <tr class="odd">
 <td align="right">1</td>
-<td align="right">-1.1323655</td>
-<td align="right">1.3350575</td>
+<td align="right">-0.2677796</td>
+<td align="right">-1.1495673</td>
 </tr>
 <tr class="even">
 <td align="right">2</td>
-<td align="right">-0.7875753</td>
-<td align="right">-1.2133955</td>
+<td align="right">-0.3635290</td>
+<td align="right">1.2939085</td>
 </tr>
 <tr class="odd">
 <td align="right">3</td>
-<td align="right">0.8764906</td>
-<td align="right">-0.6973375</td>
+<td align="right">1.0291560</td>
+<td align="right">-0.4317920</td>
 </tr>
 <tr class="even">
 <td align="right">4</td>
-<td align="right">1.0195403</td>
-<td align="right">-0.3126511</td>
+<td align="right">-0.2638047</td>
+<td align="right">0.3443449</td>
 </tr>
 <tr class="odd">
 <td align="right">5</td>
-<td align="right">-0.2536588</td>
-<td align="right">1.2321988</td>
+<td align="right">0.4261811</td>
+<td align="right">-0.4751273</td>
 </tr>
 <tr class="even">
 <td align="right">6</td>
-<td align="right">-0.3274184</td>
-<td align="right">0.7764865</td>
+<td align="right">1.2697468</td>
+<td align="right">0.7615962</td>
 </tr>
 <tr class="odd">
 <td align="right">7</td>
-<td align="right">-0.5838995</td>
-<td align="right">0.5046358</td>
+<td align="right">-2.4711206</td>
+<td align="right">0.0701522</td>
 </tr>
 <tr class="even">
 <td align="right">8</td>
-<td align="right">0.6254302</td>
-<td align="right">0.8408165</td>
+<td align="right">-0.8314822</td>
+<td align="right">0.4079785</td>
 </tr>
 <tr class="odd">
 <td align="right">9</td>
-<td align="right">-0.4307918</td>
-<td align="right">-2.0545288</td>
+<td align="right">0.5470372</td>
+<td align="right">-1.0239402</td>
 </tr>
 <tr class="even">
 <td align="right">10</td>
-<td align="right">-0.1372466</td>
-<td align="right">1.8822383</td>
+<td align="right">0.0803618</td>
+<td align="right">1.2476843</td>
 </tr>
 </tbody>
 </table>
@@ -539,18 +540,19 @@ summary(mod7) # print summary</code></pre>
 ## 
 ## Residuals:
 ##     Min      1Q  Median      3Q     Max 
-## -7.3088 -1.3201 -0.0242  1.3288  7.0015 
+## -7.5128 -1.3554  0.0174  1.3832  7.2877 
 ## 
 ## Coefficients:
 ##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 80.04364    0.01964 4075.33   &lt;2e-16 ***
-## X            0.50430    0.01983   25.43   &lt;2e-16 ***
+## (Intercept) 80.00069    0.02015 3970.43   &lt;2e-16 ***
+## X            0.51867    0.02012   25.77   &lt;2e-16 ***
 ## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## Signif. codes:  
+## 0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 ## 
-## Residual standard error: 1.964 on 9998 degrees of freedom
-## Multiple R-squared:  0.06074,    Adjusted R-squared:  0.06065 
-## F-statistic: 646.6 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
+## Residual standard error: 2.015 on 9998 degrees of freedom
+## Multiple R-squared:  0.0623, Adjusted R-squared:  0.06221 
+## F-statistic: 664.3 on 1 and 9998 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div id="question-8" class="section level3">
 <h3>Question 8</h3>
@@ -570,7 +572,7 @@ p_values &lt;- replicate(1000, sim_lm_power(n = 50, b0 = 80, b1 = 0.5, X_mu = 0,
 power &lt;- mean(p_values &lt; .05)
 
 power # print the value</code></pre>
-<pre><code>## [1] 0.4</code></pre>
+<pre><code>## [1] 0.403</code></pre>
 </div>
 <div id="question-9" class="section level3">
 <h3>Question 9</h3>
@@ -580,63 +582,8 @@ power # print the value</code></pre>
 false_pos &lt;- mean(p_values &lt; .05)
 
 false_pos # print the value</code></pre>
-<pre><code>## [1] 0.045</code></pre>
+<pre><code>## [1] 0.046</code></pre>
 </div>
-</div>
-<div id="answer-checks" class="section level2">
-<h2>Answer Checks</h2>
-<p>You’ve made it to the end. Make sure you are able to knit this document to HTML. You can check your answers below in the knit document.</p>
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th align="left">Question</th>
-<th align="left">Answer</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>2</td>
-<td align="left"><a href="#question-2">Question 2</a></td>
-<td align="left">correct</td>
-</tr>
-<tr class="even">
-<td>3</td>
-<td align="left"><a href="#question-3">Question 3</a></td>
-<td align="left">correct</td>
-</tr>
-<tr class="odd">
-<td>4</td>
-<td align="left"><a href="#question-4">Question 4</a></td>
-<td align="left">correct</td>
-</tr>
-<tr class="even">
-<td>5</td>
-<td align="left"><a href="#question-5">Question 5</a></td>
-<td align="left">correct</td>
-</tr>
-<tr class="odd">
-<td>6</td>
-<td align="left"><a href="#question-6">Question 6</a></td>
-<td align="left">correct</td>
-</tr>
-<tr class="even">
-<td>7</td>
-<td align="left"><a href="#question-7">Question 7</a></td>
-<td align="left">correct</td>
-</tr>
-<tr class="odd">
-<td>8</td>
-<td align="left"><a href="#question-8">Question 8</a></td>
-<td align="left">correct</td>
-</tr>
-<tr class="even">
-<td>9</td>
-<td align="left"><a href="#question-9">Question 9</a></td>
-<td align="left">correct</td>
-</tr>
-</tbody>
-</table>
 </div>
 
 

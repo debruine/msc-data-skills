@@ -1,41 +1,45 @@
 # Introduction to GLM {#glm}
 
-<img src="images/memes/linear_regression.jpg" class="meme right">
 
-## Learning Objectives
+<img src="images/memes/glm_meme.png" class="meme right"
+     alt="Top panel: Fred from Scooby Doo, about to unmask a bound villain, with the text 't-test, ANOVA, Correlation, Regression, etc.'; Bottom panel: Villain unmasked, with the text: 'The general linear model'; credit: Stuart Ritchie">
+
+<!--
+<img src="images/memes/linear_regression.jpg" class="meme right"
+     alt="Woody and Buzz from Toy Story. Top text: Linear Regression; Bottom text: Linear regression everywhere">
+     -->
+
+## Learning Objectives {#ilo9}
 
 ### Basic
 
 1. Define the [components](#glm-components) of the GLM
-2. [Simulate data](#sim-glm) using GLM equations
+2. [Simulate data](#sim-glm) using GLM equations [(video)](https://youtu.be/JQ90LnVCbKc){class="video"}
 3. Identify the model parameters that correspond to the data-generation parameters
-4. Understand and plot [residuals](#residuals)
-5. [Predict new values](#predict) using the model
-6. Explain the differences among [coding schemes](#coding-schemes) 
+4. Understand and plot [residuals](#residuals) [(video)](https://youtu.be/sr-NtxiH2Qk){class="video"}
+5. [Predict new values](#predict) using the model [(video)](https://youtu.be/0o4LEbVVWfM){class="video"}
+6. Explain the differences among [coding schemes](#coding-schemes) [(video)](https://youtu.be/SqL28AbLj3g){class="video"}
 
 ### Intermediate
 
 7. Demonstrate the [relationships](#test-rels) among two-sample t-test, one-way ANOVA, and linear regression
 8. Given data and a GLM, [generate a decomposition matrix](#decomp) and calculate sums of squares, mean squares, and F ratios for a one-way ANOVA
 
-## Resources
+## Resources {#resources9}
 
 * [Stub for this lesson](stubs/9_glm.Rmd)
 * [Jeff Miller and Patricia Haden, Statistical Analysis with the Linear Model (free online textbook)](http://www.otago.ac.nz/psychology/otago039309.pdf)
 * [lecture slides introducing the General Linear Model](slides/08_glm_slides.pdf)
-* [GLM shiny app](http://shiny.psy.gla.ac.uk/Dale/GLM/)
-* [F distribution](http://shiny.psy.gla.ac.uk/Dale/fdist)
+* [GLM shiny app](http://rstudio2.psy.gla.ac.uk/Dale/GLM)
+* [F distribution](http://rstudio2.psy.gla.ac.uk/Dale/fdist)
 
-## Setup
-
-You'll need the following packages. 
+## Setup {#setup9}
 
 
 ```r
 # libraries needed for these examples
 library(tidyverse)
 library(broom)
-
 set.seed(30250) # makes sure random numbers are reproducible
 ```
 
@@ -44,7 +48,7 @@ set.seed(30250) # makes sure random numbers are reproducible
 
 ### What is the GLM?
 
-The General Linear Model (GLM) a general mathematical framework for expressing relationships among variables that can express or test linear relationships between a numerical **dependent variable** and any combination of categorical or continuous **independent variables**.
+The <a class='glossary' target='_blank' title='A mathematical model comparing how one or more independent variables affect a continuous dependent variable' href='https://psyteachr.github.io/glossary/g#general-linear-model'>General Linear Model</a> (GLM) is a general mathematical framework for expressing relationships among variables that can express or test linear relationships between a numerical <a class='glossary' target='_blank' title='The target variable that is being analyzed, whose value is assumed to depend on other variables.' href='https://psyteachr.github.io/glossary/d#dependent-variable'>dependent variable</a> and any combination of <a class='glossary' target='_blank' title='Data that can only take certain values, such as types of pet.' href='https://psyteachr.github.io/glossary/c#categorical'>categorical</a> or <a class='glossary' target='_blank' title='Data that can take on any values between other existing values.' href='https://psyteachr.github.io/glossary/c#continuous'>continuous</a> <a class='glossary' target='_blank' title='A variable whose value is assumed to influence the value of a dependent variable.' href='https://psyteachr.github.io/glossary/i#independent-variable'>independent variables</a>.
 
 ### Components {#glm-components}
 
@@ -69,7 +73,7 @@ Don't worry if this doesn't make sense until we walk through a concrete example.
 
 ### Simulating data from GLM {#sim-glm}
 
-A good way to learn about linear models is to simulate data where you know exactly how the variables are related, and then analyse this simulated data to see where the parameters show up in the analysis.
+A good way to learn about linear models is to <a class='glossary' target='_blank' title='Generating data from summary parameters' href='https://psyteachr.github.io/glossary/s#simulation'>simulate</a> data where you know exactly how the variables are related, and then analyse this simulated data to see where the parameters show up in the analysis.
 
 We'll start with a very simple linear model that just has a single categorical factor with two levels. Let's say we're predicting reaction times for congruent and incongruent trials in a Stroop task for a single participant. Average reaction time (`mu`) is 800ms, and is 50ms faster for congruent than incongruent trials (`effect`). 
 
@@ -79,11 +83,11 @@ A **factor** is a categorical variable that is used to divide subjects into grou
 In the example above, trial type is a <select class='solveme' name='q_1' data-answer='["factor"]'> <option></option> <option>factor</option> <option>level</option></select>, incongrunt is a <select class='solveme' name='q_2' data-answer='["level"]'> <option></option> <option>factor</option> <option>level</option></select>, and congruent is a <select class='solveme' name='q_3' data-answer='["level"]'> <option></option> <option>factor</option> <option>level</option></select>.
 </div>
 
-You need to represent categorical factors with numbers. The numbers, or **coding** you choose will affect the numbers you get out of the analysis and how you need to interpret them. Here, we will **effect code** the trial types so that congruent trials are coded as +0.5, and incongruent trials are coded as -0.5.
+You need to represent <a class='glossary' target='_blank' title='Data that can only take certain values, such as types of pet.' href='https://psyteachr.github.io/glossary/c#categorical'>categorical</a> factors with numbers. The numbers, or <a class='glossary' target='_blank' title='How to represent categorical variables with numbers for use in models.' href='https://psyteachr.github.io/glossary/c#coding-scheme'>coding scheme</a> you choose will affect the numbers you get out of the analysis and how you need to interpret them. Here, we will <a class='glossary' target='_blank' title='A coding scheme for categorical variables that contrasts each group mean with the mean of all the group means.' href='https://psyteachr.github.io/glossary/e#effect-code'>effect code</a> the trial types so that congruent trials are coded as +0.5, and incongruent trials are coded as -0.5.
 
-A person won't always respond exactly the same way. They might be a little faster on some trials than others, due to random fluctuations in attention, learning about the task, or fatigue. So we can add an **error term** to each trial. We can't know how much any specific trial will differ, but we can characterise the distribution of how much trials differ from average and then sample from this distribution. 
+A person won't always respond exactly the same way. They might be a little faster on some trials than others, due to random fluctuations in attention, learning about the task, or fatigue. So we can add an <a class='glossary' target='_blank' title='The term in a model that represents the difference between the actual and predicted values' href='https://psyteachr.github.io/glossary/e#error-term'>error term</a> to each trial. We can't know how much any specific trial will differ, but we can characterise the distribution of how much trials differ from average and then sample from this distribution. 
 
-Here, we'll assume the error term is sampled from a normal distribution with a standard deviation of 100 ms (the mean of the error term distribution is always 0). We'll also sample 100 trials of each type, so we can see a range of variation.
+Here, we'll assume the error term is sampled from a <a class='glossary' target='_blank' title='A symmetric distribution of data where values near the centre are most probable.' href='https://psyteachr.github.io/glossary/n#normal-distribution'>normal distribution</a> with a <a class='glossary' target='_blank' title='A statistic that measures how spread out data are relative to the mean.' href='https://psyteachr.github.io/glossary/s#standard-deviation'>standard deviation</a> of 100 ms (the mean of the error term distribution is always 0). We'll also sample 100 trials of each type, so we can see a range of variation.
 
 So first create variables for all of the parameters that describe your data.
 
@@ -136,7 +140,6 @@ Now we can analyse the data we simulated using the function `lm()`. It takes the
 
 ```r
 my_lm <- lm(RT ~ trial_type.e, data = dat)
-
 summary(my_lm)
 ```
 
@@ -169,12 +172,11 @@ Notice how the **estimate** for the `(Intercept)` is close to the value we set f
 
 ### Residuals {#residuals}
 
-You can use the `residuals()` function to extract the error term for each each data point. This is the DV values, minus the estimates for the intercept and trial type. We'll make a density plot of the residuals below and compare it to the normal distribution we used for the error term.
+You can use the `residuals()` function to extract the error term for each each data point. This is the DV values, minus the estimates for the intercept and trial type. We'll make a density plot of the <a class='glossary' target='_blank' title='That part of an observation that cannot be captured by the statistical model, and thus is assumed to reflect unknown factors.' href='https://psyteachr.github.io/glossary/r#residual-error'>residuals</a> below and compare it to the normal distribution we used for the error term.
 
 
 ```r
 res <- residuals(my_lm)
-
 ggplot(dat) + 
   stat_function(aes(0), color = "grey60",
                 fun = dnorm, n = 101,
@@ -210,7 +212,7 @@ ggplot(dat) +
 
 ### Predict New Values {#predict}
 
-You can use the estimates from your model to predict new data points, given values for the model parameters. For this example, we only need to know the trial type to make a prediction.
+You can use the estimates from your model to predict new data points, given values for the model parameters. For this simple example, we just need to know the trial type to make a prediction.
 
 For congruent trials, you would predict that a new data point would be equal to the intercept estimate plus the trial type estimate multiplied by 0.5 (the effect code for congruent trials).
 
@@ -219,9 +221,7 @@ For congruent trials, you would predict that a new data point would be equal to 
 int_est <- my_lm$coefficients[["(Intercept)"]]
 tt_est  <- my_lm$coefficients[["trial_type.e"]]
 tt_code <- trial_types[["congruent"]]
-
 new_congruent_RT <- int_est + tt_est * tt_code
-
 new_congruent_RT
 ```
 
@@ -243,8 +243,7 @@ predict(my_lm, newdata = tibble(trial_type.e = 0.5))
 
 
 <div class="info">
-<p>If you look up this function using <code>?predict</code>, you will see that “The function invokes particular methods which depend on the class of the first argument.”</p>
-<p>What this means is that <code>predict()</code> works differently depending on whether you’re predicting from the output of <code>lm()</code> or other analysis functions. You can search for help on the lm version with <code>?predict.lm</code>.</p>
+<p>If you look up this function using <code>?predict</code>, you will see that “The function invokes particular methods which depend on the class of the first argument.” What this means is that <code>predict()</code> works differently depending on whether you’re predicting from the output of <code>lm()</code> or other analysis functions. You can search for help on the lm version with <code>?predict.lm</code>.</p>
 </div>
 
 
@@ -271,7 +270,6 @@ tt_sum <- c("congruent"   = +1,
             "incongruent" = -1)
 tt_tr <- c("congruent"   = 1, 
            "incongruent" = 0)
-
 dat <- dat %>% mutate(
   trial_type.sum = recode(trial_type, !!!tt_sum),
   trial_type.tr = recode(trial_type, !!!tt_tr)
@@ -351,7 +349,6 @@ ANOVA is also a special, limited version of the linear model.
 
 ```r
 my_aov <- aov(RT ~ trial_type.e, data = dat)
-
 summary(my_aov, intercept = TRUE)
 ```
 
@@ -560,8 +557,28 @@ aov(Y ~ grp, data = dat) %>% summary(intercept = TRUE)
 </div>
 
 
+## Glossary {#glossary9}
 
-## Exercises
+
+
+|term                                                                                                                            |definition                                                                                                                    |
+|:-------------------------------------------------------------------------------------------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------|
+|<a class='glossary' target='_blank' href='https://psyteachr.github.io/glossary/c#categorical'>categorical</a>                   |Data that can only take certain values, such as types of pet.                                                                 |
+|<a class='glossary' target='_blank' href='https://psyteachr.github.io/glossary/c#coding.scheme'>coding scheme</a>               |How to represent categorical variables with numbers for use in models.                                                        |
+|<a class='glossary' target='_blank' href='https://psyteachr.github.io/glossary/c#continuous'>continuous</a>                     |Data that can take on any values between other existing values.                                                               |
+|<a class='glossary' target='_blank' href='https://psyteachr.github.io/glossary/d#dependent.variable'>dependent variable</a>     |The target variable that is being analyzed, whose value is assumed to depend on other variables.                              |
+|<a class='glossary' target='_blank' href='https://psyteachr.github.io/glossary/e#effect.code'>effect code</a>                   |A coding scheme for categorical variables that contrasts each group mean with the mean of all the group means.                |
+|<a class='glossary' target='_blank' href='https://psyteachr.github.io/glossary/e#error.term'>error term</a>                     |The term in a model that represents the difference between the actual and predicted values                                    |
+|<a class='glossary' target='_blank' href='https://psyteachr.github.io/glossary/g#general.linear.model'>general linear model</a> |A mathematical model comparing how one or more independent variables affect a continuous dependent variable                   |
+|<a class='glossary' target='_blank' href='https://psyteachr.github.io/glossary/i#independent.variable'>independent variable</a> |A variable whose value is assumed to influence the value of a dependent variable.                                             |
+|<a class='glossary' target='_blank' href='https://psyteachr.github.io/glossary/n#normal.distribution'>normal distribution</a>   |A symmetric distribution of data where values near the centre are most probable.                                              |
+|<a class='glossary' target='_blank' href='https://psyteachr.github.io/glossary/r#residual.error'>residual error</a>             |That part of an observation that cannot be captured by the statistical model, and thus is assumed to reflect unknown factors. |
+|<a class='glossary' target='_blank' href='https://psyteachr.github.io/glossary/s#simulation'>simulation</a>                     |Generating data from summary parameters                                                                                       |
+|<a class='glossary' target='_blank' href='https://psyteachr.github.io/glossary/s#standard.deviation'>standard deviation</a>     |A statistic that measures how spread out data are relative to the mean.                                                       |
+
+
+
+## Exercises {#exercises9}
 
 Download the [exercises](exercises/09_glm_exercise.Rmd). See the [answers](exercises/09_glm_answers.Rmd) only after you've attempted all the questions.
 

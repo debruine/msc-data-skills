@@ -6,67 +6,84 @@ output: html_document
 
 ```{r setup, include=FALSE}
 # please do not alter this code chunk
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, error = TRUE)
 library(tidyverse)
-set.seed(90210) # makes sure random numbers are reproducible
+
+# install the class package dataskills to access built-in data
+# devtools::install_github("psyteachr/msc-data-skills)
+# or download data from the website
+# https://psyteachr.github.io/msc-data-skills/data/data.zip
 ```
 
-## Vectors
+## Load built-in datasets
 
-### Question 1
-
-The built-in vector `letters` contains the letters of the English alphabet.  Use an indexing vector of integers to extract the letters that spell 'cat'.
+List the datasets in `dplyr`.
 
 ```{r Q1}
-cat <- NULL
+# put code here
+
 ```
 
 
-### Question 2
-
-The function `colors()` returns all of the color names that R is aware of. What is the length of the vector returned by this function? (Use code to find the answer.)
+Load the built-in dataset `starwars`.
 
 ```{r Q2}
-col_length <- NULL
+# put code here
+
 ```
 
-### Question 3
 
-The function call `runif(1000, 0, 1)` will draw 1000 numbers from a uniform distribution from 0 to 1, which simulates the p-values that you would get from 1000 experiments where the null hypothesis is true. Store the result of this call in `pvals`. Create a logical vector called `is_sig` that is `TRUE` if the corresponding element of `pvals` is less than .05, `FALSE` otherwise (hint: vectorized operations from the last lession), then use this logical vector to pull out those p-values. Finally, calculate the proportion of those p-values that were significant.
+Convert the built-in base R `mtcars` dataset to a tibble, and store it in the object `mt`.
 
 ```{r Q3}
-pvals <- runif(1000, 0, 1)
-
-is_sig <- NULL
-
-prop_sig <- NULL
-
+mt <- NULL
 ```
 
 
-## Tabular Data 
+## Import data from CSV and Excel files
 
-### Question 4
-
-Create a tibble with the columns `name`, `age`, and `country` of origin for 3 people you know.
+Using the data directory created by `dataskills::getdata()` (or download [the zip file](https://psyteachr.github.io/msc-data-skills/data/data.zip), read "disgust_scores.csv" into a table.
 
 ```{r Q4}
-
-people <- NULL
-
+disgust <- NULL
 ```
 
-
-### Question 5
-
-Convert the built-in base R `iris` dataset to a tibble, and store it in the variable `iris2`.
+Override the default column specifications to skip the `id` column.
 
 ```{r Q5}
-iris2 <- NULL
+disgust_skip <- NULL
 ```
 
 
-### Question 6
+How many rows and columns are in the `disgust` dataset?
+
+```{r Q6}
+disgust_rows <- NULL
+disgust_cols <- NULL
+```
+
+
+Load the data in "data/stroop.csv" as `stroop1` and "data/stroop.xlsx" as `stroop2`.
+
+```{r Q7}
+stroop1 <- NULL
+stroop2 <- NULL
+```
+
+Use `glimpse()` to figure out the difference between the two data tables and fix the problem.
+
+```{r Q8}
+stroop2b <- NULL
+```
+
+
+## Create a data table
+
+Create a tibble with the columns `name`, `age`, and `country` of origin for 2 people you know.
+
+```{r Q9}
+people <- NULL
+```
 
 Create a tibble that has the structure of the table below, using the minimum typing possible. (Hint: `rep()`).  Store it in the variable `my_tbl`.
 
@@ -81,66 +98,111 @@ ID |  A | B   | C
 7	| A2	| B1	| C1	
 8	| A2	| B2	| C1
 
-```{r Q6}
+```{r Q10}
 my_tbl <- NULL  
 ```
 
+## Understand the use the basic data types
 
-## Data Import
+Set the following objects to the number 1 with the indicated data type:
 
-### Question 7
+* `one_int` (integer)
+* `one_dbl` (double)
+* `one_chr` (character)
 
-Download the dataset [disgust_scores.csv](https://psyteachr.github.io/msc-data-skills/data/disgust_scores.csv) and read it into a table.
+```{r Q11}
+one_int <- NULL
+one_dbl <- NULL
+one_chr <- NULL
+```
 
-```{r Q7, message = FALSE}
-disgust <- NULL
+Set the objects `T_log`, `T_chr`, `T_int` and `T_dbl` to logical, character, integer and double values that will all be equal to `TRUE`. 
+
+```{r Q12}
+T_log <- NULL
+T_chr <- NULL
+T_int <- NULL
+T_dbl <- NULL
+```
+
+Check your answers with this code:
+
+```{r Q12-check}
+# these should all evaluate to TRUE
+c(
+  T_log == TRUE,
+  T_chr == TRUE,
+  T_int == TRUE,
+  T_dbl == TRUE,
+  is.logical(T_log),
+  is.character(T_chr),
+  is.integer(T_int),
+  is.double(T_dbl)
+)
 ```
 
 
-### Question 8
+## Understand and use the basic container types
 
-Override the default column specifications to skip the `id` column.
+Create a vector of the numbers 3, 6, and 9.
 
-```{r Q8, message = FALSE}
-disgust_skip <- NULL
-```
-
-### Question 9
-  
-How many rows and columns are in the dataset from question 7?
-
-```{r Q9}
-disgust_rows <- NULL
-disgust_cols <- NULL
+```{r Q13}
+threes <- NULL
 ```
 
 
-## Answer Checks
+The built-in vector `letters` contains the letters of the English alphabet.  Use an indexing vector of integers to extract the letters that spell 'cat'.
 
-You've made it to the end. Make sure you are able to knit this document to HTML. You can check your answers below in the knit document.
-
-```{r answer-checks, echo = FALSE, warning=FALSE, results='asis'}
-# do not edit
-Q <- list()
-Q["1"] <- all.equal(cat, c("c", "a", "t"))
-Q["2"] <- all.equal(col_length, 657L)
-Q["3"] <- all.equal(prop_sig, 0.046)
-Q["4"] <- c(all.equal(names(people), c("name", "age", "country")),
-          nrow(people) == 3L) %>% all()
-Q["5"] <- all.equal(iris, iris2, check.attributes = FALSE)
-Q["6"] <- c(all.equal(names(my_tbl), c("ID", "A", "B", "C")),
-          nrow(my_tbl) == 8L) %>% all()
-Q["7"] <- c(all.equal(names(disgust), c("id", "user_id", "date", "moral", "pathogen", "sexual")), 
-          nrow(disgust) == 20000L) %>% all()
-Q["8"] <- c(all.equal(names(disgust_skip), c("user_id", "date", "moral", "pathogen", "sexual")), 
-          nrow(disgust_skip) == 20000L) %>% all()
-Q["9"] <- c(all.equal(disgust_rows, 20000L),
-          all.equal(disgust_cols, 6)) %>% all()
-
-ans <- sapply(Q, isTRUE)
-
-knitr::kable(data.frame(
-  Question = paste0("<a href='#question-", names(Q), "'>Question ", names(Q), "</a>"),
-  Answer = ifelse(ans, "correct", "incorrect")
-))
+```{r Q14}
+cat <- NULL
 ```
+
+
+The function `colors()` returns all of the color names that R is aware of. What is the length of the vector returned by this function? (Use code to find the answer.)
+
+```{r Q15}
+col_length <- NULL
+```
+
+
+Create a named list called `col_types` where the name is each column in the built-in dataset `table1` and the value is the column data type (e.g., "double", "character", "integer", "logical").
+
+```{r Q16}
+col_types <- NULL
+```
+
+
+## Use vectorized operations
+
+Set the object `x` to the integers 1 to 100. Use vectorised operations to set `y` to `x` squared. Use `plot(x, y)` to visualise the relationship between these two numbers.
+
+```{r Q17}
+x <- NULL
+y <- NULL
+```
+
+Set `t` to the numbers 0 to 100 in increments of 0.1. Set `x` to the sine of `t` and `y` to the cosine of `t`. Plot `x` against `y`.
+
+```{r Q18}
+t <- NULL
+x <- NULL
+y <- NULL
+```
+
+
+The function call `runif(n, min, max)` will draw `n` numbers from a uniform distribution from `min` to `max`. If you set `n` to 10000, `min` to 0 and `max` to 1, this simulates the p-values that you would get from 10000 experiments where the null hypothesis is true. Create the following objects:
+
+* `pvals`: 10000 simulated p-values using `runif()`
+* `is_sig`: a logical vector that is `TRUE` if the corresponding element of `pvals` is less than .05, `FALSE` otherwise
+* `sig_vals`: a vector of just the significant p-values
+* `prop_sig`: the proportion of those p-values that were significant
+
+```{r Q19}
+set.seed(8675309) # ensures you get the same random numbers each time you run this code chunk
+
+pvals    <- NULL
+is_sig   <- NULL
+sig_vals <- NULL
+prop_sig <- NULL
+```
+
